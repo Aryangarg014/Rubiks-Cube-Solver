@@ -3,6 +3,7 @@
 using namespace std;
 
 int main(){
+    srand(time(0));     // seed for the random function
     auto start = chrono::high_resolution_clock::now();
 
     cout << "Setup working!" << endl;

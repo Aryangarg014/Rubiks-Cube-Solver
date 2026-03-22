@@ -17,6 +17,8 @@ char Cube::getColorLetter(COLOR color){
             return 'O';
         case COLOR::WHITE :
             return 'W';
+        default:
+            return '?';
     }
 }
 
@@ -60,7 +62,15 @@ void Cube::print() const{
 }
 
 vector<Cube::MOVE> Cube::randomShuffleCube(int n){
+    vector<MOVE> moves;
 
+    for(int i=0; i<n; i++){
+        int ind = rand() % 18;
+        MOVE randomMove = static_cast<MOVE>(ind);
+        moves.push_back(randomMove);
+        this->move(randomMove);
+    }
+    return moves;
 }
 
 Cube& Cube::move(MOVE m){
@@ -101,6 +111,8 @@ Cube& Cube::move(MOVE m){
             return this->b_prime();
         case MOVE::B2:
             return this->b2();
+        default:
+            return *this;
     }
 }
 
@@ -142,5 +154,7 @@ Cube& Cube::invert(MOVE m){
             return this->b();
         case MOVE::B2:
             return this->b2();
+        default:
+            return *this;
     }
 }
