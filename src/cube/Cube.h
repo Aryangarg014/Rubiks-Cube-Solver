@@ -75,10 +75,14 @@ public:
     // makes a particular move and then return the same Cube object
     Cube& move(MOVE m);
 
-
+    // invert the given move or apply the inverse of the move
     Cube& invert(MOVE m);
 
-    // specific functions for moves
+    /* 
+      specific functions for moves
+      they perform the operation and return the same cube object so 
+      '&' sign is used to show the reference. This allows us to apply chaining
+    */
     virtual Cube& l() = 0;
 
     virtual Cube& l_prime() = 0;
