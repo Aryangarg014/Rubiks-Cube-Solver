@@ -2,7 +2,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class Cube{
+class RubiksCube{
 
 public:
     enum class FACE{
@@ -19,7 +19,7 @@ public:
     };
 
     enum class COLOR{
-        RED, BLUE, GREEN, YELLOW, ORANGE, WHITE
+        WHITE, GREEN, RED, BLUE, ORANGE, YELLOW, UNKNOWN
     };
     
 
@@ -31,9 +31,9 @@ public:
     void print() const;
 
     /*
-     * Print the Rubik Cube in Planar format.
+     * Print the Rubiks Cube in Planar format.
      *
-     * The cube is opened as follows.
+     * The RubiksCube is opened as follows.
      *
      * The sides:
      *    U
@@ -56,8 +56,8 @@ public:
     */
 
 
-    // randomly shuffle a solved cube n number of times
-    vector<MOVE> randomShuffleCube(int n);
+    // randomly shuffle a solved RubiksCube n number of times
+    vector<MOVE> randomShuffleRubiksCube(int n);
 
 
     // tells color of a particular cell given the face, row, col
@@ -72,51 +72,51 @@ public:
     static char getColorLetter(COLOR color);
 
 
-    // makes a particular move and then return the same Cube object
-    Cube& move(MOVE m);
+    // makes a particular move and then return the same RubiksCube object
+    RubiksCube& move(MOVE m);
 
     // invert the given move or apply the inverse of the move
-    Cube& invert(MOVE m);
+    RubiksCube& invert(MOVE m);
 
     /* 
       specific functions for moves
-      they perform the operation and return the same cube object so 
+      they perform the operation and return the same RubiksCube object so 
       '&' sign is used to show the reference. This allows us to apply chaining
     */
-    virtual Cube& l() = 0;
+    virtual RubiksCube& l() = 0;
 
-    virtual Cube& l_prime() = 0;
+    virtual RubiksCube& l_prime() = 0;
 
-    virtual Cube& l2() = 0;
+    virtual RubiksCube& l2() = 0;
 
-    virtual Cube& u() = 0;
+    virtual RubiksCube& u() = 0;
 
-    virtual Cube& u_prime() = 0;
+    virtual RubiksCube& u_prime() = 0;
 
-    virtual Cube& u2() = 0;
+    virtual RubiksCube& u2() = 0;
 
-    virtual Cube& r() = 0;
+    virtual RubiksCube& r() = 0;
 
-    virtual Cube& r_prime() = 0;
+    virtual RubiksCube& r_prime() = 0;
 
-    virtual Cube& r2() = 0;
+    virtual RubiksCube& r2() = 0;
 
-    virtual Cube& d() = 0;
+    virtual RubiksCube& d() = 0;
 
-    virtual Cube& d_prime() = 0;
+    virtual RubiksCube& d_prime() = 0;
 
-    virtual Cube& d2() = 0;
+    virtual RubiksCube& d2() = 0;
 
-    virtual Cube& b() = 0;
+    virtual RubiksCube& b() = 0;
 
-    virtual Cube& b_prime() = 0;
+    virtual RubiksCube& b_prime() = 0;
 
-    virtual Cube& b2() = 0;
+    virtual RubiksCube& b2() = 0;
 
-    virtual Cube& f() = 0;
+    virtual RubiksCube& f() = 0;
 
-    virtual Cube& f_prime() = 0;
+    virtual RubiksCube& f_prime() = 0;
 
-    virtual Cube& f2() = 0;
+    virtual RubiksCube& f2() = 0;
 
 };

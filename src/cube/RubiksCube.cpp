@@ -1,9 +1,9 @@
-#include <Cube.h>
 #include <bits/stdc++.h>
 
+#include "RubiksCube.h"
 using namespace std;
 
-char Cube::getColorLetter(COLOR color){
+char RubiksCube::getColorLetter(COLOR color){
     switch(color){
         case COLOR::RED :
             return 'R';
@@ -22,10 +22,12 @@ char Cube::getColorLetter(COLOR color){
     }
 }
 
-void Cube::print() const{
+void RubiksCube::print() const{
     cout << "Rubiks Cube : " << endl << endl;
 
     for(int row=0; row<3; row++){
+        for (int i=0; i<7; i++) cout << " ";
+
         for(int col=0; col<3; col++){
             cout << getColorLetter(getColor(FACE::UP, row, col)) << " ";
         }
@@ -54,14 +56,17 @@ void Cube::print() const{
     cout << endl;
 
     for(int row=0; row<3; row++){
+        for (int i=0; i<7; i++) cout << " ";
+
         for(int col=0; col<3; col++){
             cout << getColorLetter(getColor(FACE::DOWN, row, col)) << " ";
         }
         cout << endl;
     }
+    cout << endl;
 }
 
-vector<Cube::MOVE> Cube::randomShuffleCube(int n){
+vector<RubiksCube::MOVE> RubiksCube::randomShuffleRubiksCube(int n){
     vector<MOVE> moves;
 
     for(int i=0; i<n; i++){
@@ -73,7 +78,7 @@ vector<Cube::MOVE> Cube::randomShuffleCube(int n){
     return moves;
 }
 
-Cube& Cube::move(MOVE m){
+RubiksCube& RubiksCube::move(MOVE m){
     switch(m){
         case MOVE::L : 
             return this->l();
@@ -116,7 +121,7 @@ Cube& Cube::move(MOVE m){
     }
 }
 
-Cube& Cube::invert(MOVE m){
+RubiksCube& RubiksCube::invert(MOVE m){
     switch(m){
         case MOVE::L : 
             return this->l_prime();

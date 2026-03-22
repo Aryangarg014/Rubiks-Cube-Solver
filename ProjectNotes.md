@@ -15,9 +15,9 @@ Commands:
 
 Progress:
 - Setup complete
-- CMake working
--declared the cube class and its member functions
-- Next: write implementation in cube.cpp
+- Completed the major functions in the cube.h and cube.cpp files
+- Structured RubiksCube3dArray class and Implemented L and U moves
+- Next: implement remaining moves in 3D Array representation
 
 Goals:
 - Multiple cube representations
