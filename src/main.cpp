@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
-#include "cube/RubiksCube3dArray.cpp"
 // #include <chrono>
+
+// #include "cube/RubiksCube3dArray.cpp"
+#include "cube/RubiksCube1dArray.cpp"
 using namespace std;
 
 int main(){
@@ -9,7 +11,10 @@ int main(){
 
     cout << "Setup working!" << endl;
 
-    RubiksCube3dArray cube;
+    // RubiksCube3dArray cube;
+
+    RubiksCube1dArray cube;
+
     // cube.print();
     // cube.l();
     // cube.l_prime();
@@ -25,7 +30,7 @@ int main(){
     auto moves = cube.randomShuffleRubiksCube(10);
     cout << "Moves Applied :" << endl;
     for(auto it : moves){
-        cout << RubiksCube3dArray::getMove(it) << " ";
+        cout << RubiksCube::getMove(it) << " ";
     }
     cout << endl;
     cube.print();
