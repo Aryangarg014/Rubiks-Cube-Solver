@@ -12,7 +12,22 @@ int main(){
     RubiksCube3dArray cube;
     cube.print();
     // cube.l();
-    cube.u();
+    // cube.l_prime();
+    // cube.u();
+    // cube.u_prime();
+    // cube.r();
+    // cube.d();
+    // cube.b();
+    // cube.f();
+    // cube.l2();
+    // cube.l2();
+    
+    auto moves = cube.randomShuffleRubiksCube(10);
+    for(auto it = moves.rbegin(); it != moves.rend(); it++){
+
+        cube.invert(*it);
+    }
+    assert(cube.isSolved());
     cube.print();
 
     auto end = chrono::high_resolution_clock::now();
