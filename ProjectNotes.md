@@ -16,8 +16,9 @@ Commands:
 Progress:
 - Setup complete
 - Completed the major functions in the cube.h and cube.cpp files
-- Structured RubiksCube3dArray class and Implemented L and U moves
-- Next: implement remaining moves in 3D Array representation
+- Structured RubiksCube3dArray class and Implemented all moves
+- Tested all moves in 3D aray representation
+- Next : Write implementation of 1D array representation OR first write a solver
 
 Goals:
 - Multiple cube representations

@@ -71,6 +71,8 @@ public:
     // Returns the first letter of the given COLOR
     static char getColorLetter(COLOR color);
 
+    // Convert the move into string format
+    static string getMove(MOVE move);
 
     // makes a particular move and then return the same RubiksCube object
     RubiksCube& move(MOVE m);

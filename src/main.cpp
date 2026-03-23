@@ -10,7 +10,7 @@ int main(){
     cout << "Setup working!" << endl;
 
     RubiksCube3dArray cube;
-    cube.print();
+    // cube.print();
     // cube.l();
     // cube.l_prime();
     // cube.u();
@@ -21,10 +21,15 @@ int main(){
     // cube.f();
     // cube.l2();
     // cube.l2();
-    
-    auto moves = cube.randomShuffleRubiksCube(10);
-    for(auto it = moves.rbegin(); it != moves.rend(); it++){
 
+    auto moves = cube.randomShuffleRubiksCube(10);
+    cout << "Moves Applied :" << endl;
+    for(auto it : moves){
+        cout << RubiksCube3dArray::getMove(it) << " ";
+    }
+    cout << endl;
+    cube.print();
+    for(auto it = moves.rbegin(); it != moves.rend(); it++){
         cube.invert(*it);
     }
     assert(cube.isSolved());
