@@ -19,7 +19,8 @@ Progress:
 - Structured RubiksCube3dArray class and Implemented all moves
 - Tested all moves in 3D aray representation
 - Implemented 1D array representation
-- Next : Write bitboard implementation
+- Implemented and Structured bitboard representation
+- Next : Solver
 
 Goals:
 - Multiple cube representations

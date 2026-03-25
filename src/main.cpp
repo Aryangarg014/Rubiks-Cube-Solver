@@ -3,6 +3,7 @@
 
 // #include "cube/RubiksCube3dArray.cpp"
 #include "cube/RubiksCube1dArray.cpp"
+#include "cube/RubiksCubeBitboard.cpp"
 using namespace std;
 
 int main(){
@@ -13,19 +14,9 @@ int main(){
 
     // RubiksCube3dArray cube;
 
-    RubiksCube1dArray cube;
+    // RubiksCube1dArray cube;
 
-    // cube.print();
-    // cube.l();
-    // cube.l_prime();
-    // cube.u();
-    // cube.u_prime();
-    // cube.r();
-    // cube.d();
-    // cube.b();
-    // cube.f();
-    // cube.l2();
-    // cube.l2();
+    RubiksCubeBitboard cube;
 
     auto moves = cube.randomShuffleRubiksCube(10);
     cout << "Moves Applied :" << endl;
@@ -38,6 +29,12 @@ int main(){
         cube.invert(*it);
     }
     assert(cube.isSolved());
+    // cube.u();
+    // cube.l();
+    // cube.f();
+    // cube.r();
+    // cube.b();
+    // cube.d();
     cube.print();
 
     auto end = chrono::high_resolution_clock::now();
