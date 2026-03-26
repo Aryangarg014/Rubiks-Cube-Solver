@@ -6,8 +6,6 @@ using namespace std;
 class RubiksCube1dArray : public RubiksCube{
 
 private:
-    vector<char> cube;
-
     // return the index in 1D for given face, row, col
     static inline int getIndex(int face, int row, int col) {
         return (face * 9) + (row * 3) + col;
@@ -28,17 +26,19 @@ private:
     }
 
 public:
-/*
-Solved Rubiks Cube
-    Indexing of Faces
-        Up → 0 (White)
-        Left → 1 (Green)
-        Front → 2 (Red)
-        Right → 3 (Blue)
-        Back → 4 (Orange)
-        Down → 5 (Yellow)
-*/
 
+    vector<char> cube;
+
+    /*
+    Solved Rubiks Cube
+        Indexing of Faces
+            Up → 0 (White)
+            Left → 1 (Green)
+            Front → 2 (Red)
+            Right → 3 (Blue)
+            Back → 4 (Orange)
+            Down → 5 (Yellow)
+    */
 
     // initialize the solved RubiksCube
     RubiksCube1dArray(){
@@ -342,4 +342,25 @@ Solved Rubiks Cube
         return *this;
     }
 
+    bool operator==(const RubiksCube1dArray &r2) const{
+        for(int i=0; i<54; i++){
+            if(cube[i] != r2.cube[i]) return false;
+        }
+        return true;
+    }
+
+    RubiksCube1dArray& operator=(const RubiksCube1dArray& r){
+        for(int i=0; i<54; i++){
+            cube[i] = r.cube[i];
+        }
+        return *this;
+    }
+};
+
+struct Hash1dArray{
+    size_t operator()(const RubiksCube1dArray &r) const{
+        string str;
+        for(int i=0; i<54; i++) str += r.cube[i];
+        return hash<string>()(str);
+    }
 };

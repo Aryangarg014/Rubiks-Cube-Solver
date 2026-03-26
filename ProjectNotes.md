@@ -19,9 +19,9 @@ Progress:
 - Structured RubiksCube3dArray class and Implemented all moves
 - Tested all moves in 3D aray representation
 - Implemented 1D array representation
-- Implemented and Structured bitboard representation
-- Implemented and Tested Unordered Map for 3d Array Representation
-- Next : Unordered Map for 1d Array Representation
+- Structured and Implemented bitboard representation
+- Implemented and Tested Unordered Map for 3d Array Representation, 1d Array Representation
+- Next : Unordered Map for bitboard Representation
 
 Goals:
 - Multiple cube representations
