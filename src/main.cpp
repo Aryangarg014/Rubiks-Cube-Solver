@@ -2,8 +2,8 @@
 // #include <chrono>
 
 // #include "cube/RubiksCube3dArray.cpp"
-#include "cube/RubiksCube1dArray.cpp"
-// #include "cube/RubiksCubeBitboard.cpp"
+// #include "cube/RubiksCube1dArray.cpp"
+#include "cube/RubiksCubeBitboard.cpp"
 using namespace std;
 
 int main(){
@@ -44,8 +44,11 @@ int main(){
     // RubiksCube3dArray r1;
     // RubiksCube3dArray r2;
     
-    RubiksCube1dArray r1;
-    RubiksCube1dArray r2;
+    // RubiksCube1dArray r1;
+    // RubiksCube1dArray r2;
+
+    RubiksCubeBitboard r1;
+    RubiksCubeBitboard r2;
 
     // ---------------- Comparison & Assignment Operator Testing -------------------
     
@@ -65,7 +68,9 @@ int main(){
 
     // unordered_map<RubiksCube3dArray, bool, Hash3dArray> mpp;
 
-    unordered_map<RubiksCube1dArray, bool, Hash1dArray> mpp;
+    // unordered_map<RubiksCube1dArray, bool, Hash1dArray> mpp;
+
+    unordered_map<RubiksCubeBitboard, bool, HashBitboard> mpp;
     
     r1.randomShuffleRubiksCube(7);
     r2.randomShuffleRubiksCube(7);

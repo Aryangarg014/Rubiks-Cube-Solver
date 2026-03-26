@@ -20,8 +20,8 @@ Progress:
 - Tested all moves in 3D aray representation
 - Implemented 1D array representation
 - Structured and Implemented bitboard representation
-- Implemented and Tested Unordered Map for 3d Array Representation, 1d Array Representation
-- Next : Unordered Map for bitboard Representation
+- Implemented and Tested Unordered Map for all representations
+- Next : DFS Solver
 
 Goals:
 - Multiple cube representations

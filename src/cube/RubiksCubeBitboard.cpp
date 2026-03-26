@@ -5,15 +5,6 @@ using namespace std;
 
 class RubiksCubeBitboard : public RubiksCube{
 private:
-    // White 	00000001
-    // Green 	00000010
-    // Red 	    00000100
-    // Blue 	00001000
-    // Orange 	00010000
-    // Yellow 	00100000
-    
-    // UP, LEFT, FRONT, RIGHT, BACK, DOWN
-    uint64_t cube[6];   // 6 faces(8 colors each of 8 bits)
 
     // stores the position of the cell given (row, col)
     static constexpr int cellIndex[3][3] = {
@@ -61,6 +52,17 @@ private:
     }
 
 public:
+
+    // White 	00000001
+    // Green 	00000010
+    // Red 	    00000100
+    // Blue 	00001000
+    // Orange 	00010000
+    // Yellow 	00100000
+    
+    // UP, LEFT, FRONT, RIGHT, BACK, DOWN
+    uint64_t cube[6];   // 6 faces(8 colors each of 8 bits)
+
     RubiksCubeBitboard(){
         for(int face=0; face<6; face++){
             cube[face] = getSolvedFace(face);
@@ -339,5 +341,27 @@ public:
         return *this;
     }
 
+    bool operator==(const RubiksCubeBitboard &r2) const{
+        for(int i=0; i<6; i++){
+            if(cube[i] != r2.cube[i]) return false;
+        }
+        return true;
+    }
 
+    RubiksCubeBitboard& operator=(const RubiksCubeBitboard &r){
+        for(int i=0; i<6; i++){
+            cube[i] = r.cube[i];
+        }
+        return *this;
+    }
+};
+
+struct HashBitboard{
+    size_t operator()(const RubiksCubeBitboard &r) const{
+        uint64_t hashedVal = r.cube[0];
+        for(int i=1; i<6; i++){
+            hashedVal = hashedVal ^ r.cube[i];
+        }
+        return (size_t)hashedVal;
+    }
 };
