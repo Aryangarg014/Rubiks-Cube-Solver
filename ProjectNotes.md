@@ -20,7 +20,8 @@ Progress:
 - Tested all moves in 3D aray representation
 - Implemented 1D array representation
 - Implemented and Structured bitboard representation
-- Next : Solver
+- Implemented and Tested Unordered Map for 3d Array Representation
+- Next : Unordered Map for 1d Array Representation
 
 Goals:
 - Multiple cube representations

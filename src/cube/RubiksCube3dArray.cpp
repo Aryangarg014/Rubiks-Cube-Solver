@@ -6,8 +6,6 @@ using namespace std;
 class RubiksCube3dArray : public RubiksCube{
 
 private:
-    vector<vector<vector<char>>> cube;
-
     void rotateFace(int face){
         vector<vector<char>> temp = cube[face];
         for(int i=2; i>=0; i--){
@@ -18,17 +16,19 @@ private:
     }
 
 public:
-/*
-Solved Rubiks Cube
-    Indexing of Faces
-        Up → 0 (White)
-        Left → 1 (Green)
-        Front → 2 (Red)
-        Right → 3 (Blue)
-        Back → 4 (Orange)
-        Down → 5 (Yellow)
-*/
 
+    vector<vector<vector<char>>> cube;
+
+    /*
+    Solved Rubiks Cube
+        Indexing of Faces
+            Up → 0 (White)
+            Left → 1 (Green)
+            Front → 2 (Red)
+            Right → 3 (Blue)
+            Back → 4 (Orange)
+            Down → 5 (Yellow)
+    */
 
     // initialize the solved RubiksCube
     RubiksCube3dArray(){
@@ -332,4 +332,44 @@ Solved Rubiks Cube
         return *this;
     }
 
+    // comparison operator overloaded to handle collisions in unordered map 
+    // (to traverse and compare each object with the target object in the linked list at that address)
+    bool operator==(const RubiksCube3dArray &r2) const{
+        for(int i=0; i<6; i++){
+            for(int j=0; j<3; j++){
+                for(int k=0; k<3; k++){
+                    if(cube[i][j][k] != r2.cube[i][j][k])
+                        return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Assignment operator overloaded to make deep copies of RubiksCube object
+    RubiksCube3dArray& operator=(const RubiksCube3dArray &r){
+        for(int i=0; i<6; i++){
+            for(int j=0; j<3; j++){
+                for(int k=0; k<3; k++){
+                    cube[i][j][k] = r.cube[i][j][k];
+                }
+            }
+        }
+        return *this;
+    }
+};
+
+// Hash function for unordered map
+struct Hash3dArray{
+    size_t operator()(const RubiksCube3dArray &r) const{
+        string str = "";
+        for(int i=0; i<6; i++){
+            for(int j=0; j<3; j++){
+                for(int k=0; k<3; k++){
+                    str += r.cube[i][j][k];
+                }
+            }
+        }
+        return hash<string>()(str);
+    }
 };
