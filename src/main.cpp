@@ -2,11 +2,12 @@
 // #include <chrono>
 
 #include "cube/RubiksCube.h"
-// #include "cube/RubiksCube3dArray.cpp"
+#include "cube/RubiksCube3dArray.cpp"
 #include "cube/RubiksCube1dArray.cpp"
 #include "cube/RubiksCubeBitboard.cpp"
 // #include "solver/DFSSolver.h"
-#include "solver/BFSSolver.h"
+// #include "solver/BFSSolver.h"
+#include "solver/IDDFSSolver.h"
 using namespace std;
 
 int main(){
@@ -85,17 +86,39 @@ int main(){
     // else cout << "R2 absent" << endl;
 
     // -------------------- BFS Solver Testing ------------------------
+    // RubiksCubeBitboard r;
+    // auto moves1 = r.randomShuffleRubiksCube(6);
+    
+    // cout << "Moves Applied: ";
+    // for(auto &move : moves1){
+    //     cout << RubiksCube1dArray::getMove(move) << " ";
+    // }
+    // cout << endl;
+    // r.print();
+
+    // BFSSolver<RubiksCubeBitboard, HashBitboard> solver(r);
+    // auto moves = solver.solve();
+
+    // cout << "Moves To Solve: ";
+    // for(auto &move : moves){
+    //     cout << RubiksCubeBitboard::getMove(move) << " ";
+    // }
+    // cout << endl;
+
+    // -------------------------- IDDFS Solver --------------------------
+    // RubiksCube3dArray r;
+    // RubiksCube1dArray r;
     RubiksCubeBitboard r;
     auto moves1 = r.randomShuffleRubiksCube(6);
     
     cout << "Moves Applied: ";
     for(auto &move : moves1){
-        cout << RubiksCube1dArray::getMove(move) << " ";
+        cout << RubiksCubeBitboard::getMove(move) << " ";
     }
     cout << endl;
     r.print();
 
-    BFSSolver<RubiksCubeBitboard, HashBitboard> solver(r);
+    IDDFSSolver<RubiksCubeBitboard, HashBitboard> solver(r, 7);
     auto moves = solver.solve();
 
     cout << "Moves To Solve: ";

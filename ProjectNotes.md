@@ -22,7 +22,8 @@ Progress:
 - Structured and Implemented bitboard representation
 - Implemented and Tested Unordered Map for all representations
 - Implemented and Tested the generic DFS, BFS solver
-- Next : IDDFS Solver
+- Implemented the generic IDDFS solver
+- Next : Testing of IDDFS Solver
 
 Goals:
 - Multiple cube representations
