@@ -21,8 +21,8 @@ Progress:
 - Implemented 1D array representation
 - Structured and Implemented bitboard representation
 - Implemented and Tested Unordered Map for all representations
-- Implemented and Tested the generic DFS solver
-- Next : DFS Solver
+- Implemented and Tested the generic DFS, BFS solver
+- Next : IDDFS Solver
 
 Goals:
 - Multiple cube representations

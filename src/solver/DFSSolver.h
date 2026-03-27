@@ -8,6 +8,9 @@ class DFSSolver{
 
 private:
     int maxDepth;
+    vector<RubiksCube::MOVE> moves;
+    // unordered_map<T, bool, H> visited;
+
     bool dfs(int depth){
         if(cube.isSolved()) return true;
         if(depth >= maxDepth) return false;
@@ -26,8 +29,7 @@ private:
     }
 public:
     T cube;
-    // unordered_map<T, bool, H> visited;
-    vector<RubiksCube::MOVE> moves;
+    
     DFSSolver(T cube, int maxDepth = 8){
         this->cube = cube;
         this->maxDepth = maxDepth;
