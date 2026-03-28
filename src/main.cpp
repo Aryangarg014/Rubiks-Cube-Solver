@@ -10,6 +10,65 @@
 #include "solver/IDDFSSolver.h"
 using namespace std;
 
+// Apply a given sequence of moves to any cube representation
+template<typename T>
+void applyMoves(T &cube, const vector<RubiksCube::MOVE> &moves){
+    for(auto &move : moves){
+        cube.move(move);
+    }
+}
+
+// Print move list
+void printMoves(const vector<RubiksCube::MOVE> &moves){
+    for(auto &move : moves){
+        cout << RubiksCube::getMove(move) << " ";
+    }
+    cout << endl;
+}
+
+
+// // ------------------------ DFS TEST FUNCTION ------------------------
+// template<typename T, typename H>
+// void testDFSSolver(string name, T cube, int maxDepth){
+//     cout << "===============================" << endl;
+//     cout << "Testing " << name << endl;
+
+//     auto start = chrono::high_resolution_clock::now();
+
+//     DFSSolver<T, H> solver(cube, maxDepth);
+//     auto solution = solver.solve();
+
+//     auto end = chrono::high_resolution_clock::now();
+//     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+
+//     cout << "Moves To Solve: ";
+//     printMoves(solution);
+//     cout << "Number Of Moves: " << solution.size() << endl;
+//     cout << "Execution Time: " << duration.count() << " ms" << endl;
+//     cout << "===============================" << endl << endl;
+// }
+
+// ------------------------ IDDFS TEST FUNCTION ------------------------
+template<typename T, typename H>
+void testIDDFSSolver(string name, T cube, int maxDepth){
+    cout << "===============================" << endl;
+    cout << "Testing " << name << endl;
+
+    auto start = chrono::high_resolution_clock::now();
+
+    IDDFSSolver<T, H> solver(cube, maxDepth);
+    auto solution = solver.solve();
+
+    auto end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+
+    cout << "Moves To Solve: ";
+    printMoves(solution);
+    cout << "Number Of Moves: " << solution.size() << endl;
+    cout << "Execution Time: " << duration.count() << " ms" << endl;
+    cout << "===============================" << endl << endl;
+}
+
 int main(){
     srand(time(0));     // seed for the random function
     auto start = chrono::high_resolution_clock::now();
@@ -105,27 +164,46 @@ int main(){
     // }
     // cout << endl;
 
-    // -------------------------- IDDFS Solver --------------------------
-    // RubiksCube3dArray r;
-    // RubiksCube1dArray r;
-    RubiksCubeBitboard r;
-    auto moves1 = r.randomShuffleRubiksCube(6);
+
+    // -------------------- Generate SAME shuffle ------------------------
+    int shuffleDepth = 6;
+    int solverDepth = 8;
+
+    RubiksCube3dArray tempCube;
+    auto shuffleMoves = tempCube.randomShuffleRubiksCube(shuffleDepth);
     
     cout << "Moves Applied: ";
-    for(auto &move : moves1){
-        cout << RubiksCubeBitboard::getMove(move) << " ";
-    }
+    printMoves(shuffleMoves);
     cout << endl;
-    r.print();
 
-    IDDFSSolver<RubiksCubeBitboard, HashBitboard> solver(r, 7);
-    auto moves = solver.solve();
+    // -------------------- Create Cubes ------------------------
+    RubiksCube3dArray cube3d;
+    RubiksCube1dArray cube1d;
+    RubiksCubeBitboard cubeBit;
 
-    cout << "Moves To Solve: ";
-    for(auto &move : moves){
-        cout << RubiksCubeBitboard::getMove(move) << " ";
-    }
-    cout << endl;
+    // Apply same shuffle to all 3
+    applyMoves(cube3d, shuffleMoves);
+    applyMoves(cube1d, shuffleMoves);
+    applyMoves(cubeBit, shuffleMoves);
+
+    // Optional: print only one cube for verification
+    cout << "shuffled Cube:" << endl;
+    cube3d.print();
+
+    // // -------------------- DFS Solver Testing ------------------------
+
+    // testDFSSolver<RubiksCubeBitboard, HashBitboard>("Bitboard", cubeBit, solverDepth);
+    // testDFSSolver<RubiksCube1dArray, Hash1dArray>("1D Array", cube1d, solverDepth);
+    // testDFSSolver<RubiksCube3dArray, Hash3dArray>("3D Array", cube3d, solverDepth);
+
+
+
+    // -------------------------- IDDFS Solver Testing --------------------------
+
+    testIDDFSSolver<RubiksCubeBitboard, HashBitboard>("Bitboard", cubeBit, solverDepth);
+    testIDDFSSolver<RubiksCube1dArray, Hash1dArray>("1D Array", cube1d, solverDepth);
+    testIDDFSSolver<RubiksCube3dArray, Hash3dArray>("3D Array", cube3d, solverDepth);
+
 
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
@@ -133,90 +211,3 @@ int main(){
     cout << "Execution time: " << duration.count() << " ms" << endl;
     return 0;
 }
-
-
-// #include <bits/stdc++.h>
-// #include <chrono>
-
-// #include "cube/RubiksCube.h"
-// #include "cube/RubiksCube3dArray.cpp"
-// #include "cube/RubiksCube1dArray.cpp"
-// #include "cube/RubiksCubeBitboard.cpp"
-// #include "solver/DFSSolver.h"
-
-// using namespace std;
-
-// // Apply a given sequence of moves to any cube representation
-// template<typename T>
-// void applyMoves(T &cube, const vector<RubiksCube::MOVE> &moves){
-//     for(auto &move : moves){
-//         cube.move(move);
-//     }
-// }
-
-// // Print move list
-// void printMoves(const vector<RubiksCube::MOVE> &moves){
-//     for(auto &move : moves){
-//         cout << RubiksCube::getMove(move) << " ";
-//     }
-//     cout << endl;
-// }
-
-// // Test one cube representation
-// template<typename T, typename H>
-// void testSolver(string name, T cube, int maxDepth){
-//     cout << "===============================" << endl;
-//     cout << "Testing " << name << endl;
-
-//     auto start = chrono::high_resolution_clock::now();
-
-//     DFSSolver<T, H> solver(cube, maxDepth);
-//     auto solution = solver.solve();
-
-//     auto end = chrono::high_resolution_clock::now();
-//     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
-
-//     cout << "Moves To Solve: ";
-//     printMoves(solution);
-//     cout << "Number Of Moves: " << solution.size() << endl;
-//     cout << "Execution Time: " << duration.count() << " ms" << endl;
-//     cout << "===============================" << endl << endl;
-// }
-
-// int main(){
-//     srand(time(0));     // seed for random shuffle
-
-//     cout << "Setup working!" << endl;
-
-//     int shuffleDepth = 6;
-//     int solverDepth = 8;
-
-//     // -------------------- Generate SAME shuffle ------------------------
-//     RubiksCube3dArray tempCube;
-//     auto shuffleMoves = tempCube.randomShuffleRubiksCube(shuffleDepth);
-
-//     cout << "Moves Applied: ";
-//     printMoves(shuffleMoves);
-//     cout << endl;
-
-//     // -------------------- Create Cubes ------------------------
-//     RubiksCube3dArray cube3d;
-//     RubiksCube1dArray cube1d;
-//     RubiksCubeBitboard cubeBit;
-
-//     // Apply same shuffle to all 3
-//     applyMoves(cube3d, shuffleMoves);
-//     applyMoves(cube1d, shuffleMoves);
-//     applyMoves(cubeBit, shuffleMoves);
-
-//     // Optional: print only one cube for verification
-//     cout << "shuffled Cube:" << endl;
-//     cube3d.print();
-
-//     // -------------------- DFS Solver Testing ------------------------
-//     testSolver<RubiksCube3dArray, Hash3dArray>("3D Array", cube3d, solverDepth);
-//     testSolver<RubiksCube1dArray, Hash1dArray>("1D Array", cube1d, solverDepth);
-//     testSolver<RubiksCubeBitboard, HashBitboard>("Bitboard", cubeBit, solverDepth);
-
-//     return 0;
-// }
