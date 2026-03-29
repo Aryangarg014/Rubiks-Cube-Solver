@@ -22,8 +22,11 @@ Progress:
 - Structured and Implemented bitboard representation
 - Implemented and Tested Unordered Map for all representations
 - Implemented and Tested the generic DFS, BFS solver
-- Implemented the generic IDDFS solver
-- Next : Testing of IDDFS Solver
+- Implemented and Tested the generic IDDFS solver
+
+- Created Dummy Pattern Database with h=0
+- Structured the IDA* Solver
+- Next : IDA* Solver
 
 Goals:
 - Multiple cube representations
