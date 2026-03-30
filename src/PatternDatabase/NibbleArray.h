@@ -4,7 +4,7 @@ using namespace std;
 class NibbleArray{
 
 private:
-    vector<uint8_t> arr;    // each position stores two 4-bit values(nibbles)
+    vector<uint8_t> arr;    // each position stores two 4-bit values (nibbles)
     int size;   // number of 4-bit values
 public:
     // initialize the array of a particular size with a particular value
@@ -12,8 +12,8 @@ public:
     
     /*
         Sets the value at the corresponding position in the array to the given position of nibble
-        pos -> sequential index of the permutation of a Rubik’s cube
-        value -> Number of moves it takes to solve the corners of the Rubik’s Cube
+        pos -> position of the nibble
+        value -> 4-bit value to be stored
     */
     void set(int pos, int value);
 
@@ -28,4 +28,16 @@ public:
 
     // resets the array with the given value
     void reset(uint8_t value);
+
+    /*
+        Returns pointer to the underlying byte array.
+        Useful when writing the entire nibble array to a file.
+    */
+    uint8_t* getData();
+
+    /*
+        Returns read-only pointer to the underlying byte array.
+        Useful when reading values without modifying the internal storage.
+    */
+    const uint8_t* getData() const;
 };
