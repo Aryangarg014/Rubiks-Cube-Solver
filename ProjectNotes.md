@@ -28,8 +28,8 @@ Progress:
 - Structured, Implemented and Tested the IDA* Solver with h=0
 
 - Structured and Implemented Nibble Array
-- Structured the Pattern Database
-- Next : Implement Pattern Database
+- Structured and Implemented the Pattern Database
+- Next : Corner Database
 
 Goals:
 - Multiple cube representations

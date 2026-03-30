@@ -26,7 +26,10 @@ public:
     // returns the heuristic value stored for the given cube state
     uint8_t getNumMoves(const RubiksCube& cube) const;
 
-    // stores the given number of moves as heuristic value at the given index
+    /*
+        If index is already set -> return false
+        else -> store the given number of moves as heuristic value at the given index and return true
+    */
     bool setNumMoves(int index, uint8_t moves);
 
     // stores the given number of moves as the heuristic value for the given cube state
