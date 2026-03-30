@@ -7,24 +7,25 @@
 #include "cube/RubiksCubeBitboard.cpp"
 // #include "solver/DFSSolver.h"
 // #include "solver/BFSSolver.h"
-#include "solver/IDDFSSolver.h"
+// #include "solver/IDDFSSolver.h"
+#include "solver/IDAStarSolver.h"
 using namespace std;
 
-// Apply a given sequence of moves to any cube representation
-template<typename T>
-void applyMoves(T &cube, const vector<RubiksCube::MOVE> &moves){
-    for(auto &move : moves){
-        cube.move(move);
-    }
-}
+// // Apply a given sequence of moves to any cube representation
+// template<typename T>
+// void applyMoves(T &cube, const vector<RubiksCube::MOVE> &moves){
+//     for(auto &move : moves){
+//         cube.move(move);
+//     }
+// }
 
-// Print move list
-void printMoves(const vector<RubiksCube::MOVE> &moves){
-    for(auto &move : moves){
-        cout << RubiksCube::getMove(move) << " ";
-    }
-    cout << endl;
-}
+// // Print move list
+// void printMoves(const vector<RubiksCube::MOVE> &moves){
+//     for(auto &move : moves){
+//         cout << RubiksCube::getMove(move) << " ";
+//     }
+//     cout << endl;
+// }
 
 
 // // ------------------------ DFS TEST FUNCTION ------------------------
@@ -48,26 +49,26 @@ void printMoves(const vector<RubiksCube::MOVE> &moves){
 //     cout << "===============================" << endl << endl;
 // }
 
-// ------------------------ IDDFS TEST FUNCTION ------------------------
-template<typename T, typename H>
-void testIDDFSSolver(string name, T cube, int maxDepth){
-    cout << "===============================" << endl;
-    cout << "Testing " << name << endl;
+// // ------------------------ IDDFS TEST FUNCTION ------------------------
+// template<typename T, typename H>
+// void testIDDFSSolver(string name, T cube, int maxDepth){
+//     cout << "===============================" << endl;
+//     cout << "Testing " << name << endl;
 
-    auto start = chrono::high_resolution_clock::now();
+//     auto start = chrono::high_resolution_clock::now();
 
-    IDDFSSolver<T, H> solver(cube, maxDepth);
-    auto solution = solver.solve();
+//     IDDFSSolver<T, H> solver(cube, maxDepth);
+//     auto solution = solver.solve();
 
-    auto end = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
+//     auto end = chrono::high_resolution_clock::now();
+//     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);
 
-    cout << "Moves To Solve: ";
-    printMoves(solution);
-    cout << "Number Of Moves: " << solution.size() << endl;
-    cout << "Execution Time: " << duration.count() << " ms" << endl;
-    cout << "===============================" << endl << endl;
-}
+//     cout << "Moves To Solve: ";
+//     printMoves(solution);
+//     cout << "Number Of Moves: " << solution.size() << endl;
+//     cout << "Execution Time: " << duration.count() << " ms" << endl;
+//     cout << "===============================" << endl << endl;
+// }
 
 int main(){
     srand(time(0));     // seed for the random function
@@ -165,30 +166,30 @@ int main(){
     // cout << endl;
 
 
-    // -------------------- Generate SAME shuffle ------------------------
-    int shuffleDepth = 6;
-    int solverDepth = 8;
+    // // -------------------- Generate SAME shuffle ------------------------
+    // int shuffleDepth = 6;
+    // int solverDepth = 8;
 
-    RubiksCube3dArray tempCube;
-    auto shuffleMoves = tempCube.randomShuffleRubiksCube(shuffleDepth);
+    // RubiksCube3dArray tempCube;
+    // auto shuffleMoves = tempCube.randomShuffleRubiksCube(shuffleDepth);
     
-    cout << "Moves Applied: ";
-    printMoves(shuffleMoves);
-    cout << endl;
+    // cout << "Moves Applied: ";
+    // printMoves(shuffleMoves);
+    // cout << endl;
 
-    // -------------------- Create Cubes ------------------------
-    RubiksCube3dArray cube3d;
-    RubiksCube1dArray cube1d;
-    RubiksCubeBitboard cubeBit;
+    // // -------------------- Create Cubes ------------------------
+    // RubiksCube3dArray cube3d;
+    // RubiksCube1dArray cube1d;
+    // RubiksCubeBitboard cubeBit;
 
-    // Apply same shuffle to all 3
-    applyMoves(cube3d, shuffleMoves);
-    applyMoves(cube1d, shuffleMoves);
-    applyMoves(cubeBit, shuffleMoves);
+    // // Apply same shuffle to all 3
+    // applyMoves(cube3d, shuffleMoves);
+    // applyMoves(cube1d, shuffleMoves);
+    // applyMoves(cubeBit, shuffleMoves);
 
-    // Optional: print only one cube for verification
-    cout << "shuffled Cube:" << endl;
-    cube3d.print();
+    // // Optional: print only one cube for verification
+    // cout << "shuffled Cube:" << endl;
+    // cube3d.print();
 
     // // -------------------- DFS Solver Testing ------------------------
 
@@ -198,12 +199,28 @@ int main(){
 
 
 
-    // -------------------------- IDDFS Solver Testing --------------------------
+    // // -------------------------- IDDFS Solver Testing --------------------------
 
-    testIDDFSSolver<RubiksCubeBitboard, HashBitboard>("Bitboard", cubeBit, solverDepth);
-    testIDDFSSolver<RubiksCube1dArray, Hash1dArray>("1D Array", cube1d, solverDepth);
-    testIDDFSSolver<RubiksCube3dArray, Hash3dArray>("3D Array", cube3d, solverDepth);
+    // testIDDFSSolver<RubiksCubeBitboard, HashBitboard>("Bitboard", cubeBit, solverDepth);
+    // testIDDFSSolver<RubiksCube1dArray, Hash1dArray>("1D Array", cube1d, solverDepth);
+    // testIDDFSSolver<RubiksCube3dArray, Hash3dArray>("3D Array", cube3d, solverDepth);
 
+    RubiksCubeBitboard cube;
+    cube.print();
+    auto shuffle_moves = cube.randomShuffleRubiksCube(5);
+    cout << "Moves Applied: ";
+    for(auto mv : shuffle_moves) cout << cube.getMove(mv) << " ";
+    cout << endl;
+
+    cube.print();
+
+    IDAStarSolver<RubiksCubeBitboard, HashBitboard> solver(cube);
+    vector<RubiksCube::MOVE> movesToSolve = solver.solve();
+    cout << "Moves To Solve: ";
+    for(auto mv : movesToSolve) cout << cube.getMove(mv) << " ";
+    cout << endl;
+
+    solver.cube.print();
 
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);

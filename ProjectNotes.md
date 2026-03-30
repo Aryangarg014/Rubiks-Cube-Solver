@@ -25,8 +25,8 @@ Progress:
 - Implemented and Tested the generic IDDFS solver
 
 - Created Dummy Pattern Database with h=0
-- Structured the IDA* Solver
-- Next : IDA* Solver
+- Structured, Implemented and Tested the IDA* Solver with h=0
+- Next : Pattern Database
 
 Goals:
 - Multiple cube representations
