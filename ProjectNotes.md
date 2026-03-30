@@ -26,7 +26,9 @@ Progress:
 
 - Created Dummy Pattern Database with h=0
 - Structured, Implemented and Tested the IDA* Solver with h=0
-- Next : Pattern Database
+
+- Structured Nibble Array
+- Next : Implement Nibble Array
 
 Goals:
 - Multiple cube representations
