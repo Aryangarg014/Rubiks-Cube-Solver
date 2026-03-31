@@ -202,6 +202,8 @@ string RubiksCube::getMove(MOVE move){
             return "B'";
         case MOVE::B2:
             return "B2";
+        default:
+            return "?";
     }
 }
 

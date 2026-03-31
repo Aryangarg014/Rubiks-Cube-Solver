@@ -31,7 +31,8 @@ Progress:
 - Structured and Implemented the Pattern Database
 - Added getCornerIndex and getCornerOrientation in RubiksCube base class
 - Added Permutation Indexer and math utility functions
-- Next : Corner Pattern Database
+- Added Corner Pattern Database
+- Next : Create the Corner Database Maker using BFS
 
 Goals:
 - Multiple cube representations

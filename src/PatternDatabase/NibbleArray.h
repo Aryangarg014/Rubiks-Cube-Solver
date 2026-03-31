@@ -9,7 +9,7 @@ private:
     int size;   // number of 4-bit values
 public:
     // initialize the array of a particular size with a particular value
-    NibbleArray(int size, uint8_t initialValue=0);
+    NibbleArray(int size, uint8_t initialValue=15);
     
     /*
         Sets the value at the corresponding position in the array to the given position of nibble

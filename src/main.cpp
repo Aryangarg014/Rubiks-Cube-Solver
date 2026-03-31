@@ -9,6 +9,7 @@
 // #include "solver/BFSSolver.h"
 // #include "solver/IDDFSSolver.h"
 // #include "solver/IDAStarSolver.h"
+#include "PatternDatabase/CornerPatternDatabase.h"
 using namespace std;
 
 // // Apply a given sequence of moves to any cube representation
@@ -224,11 +225,9 @@ int main(){
 
     // solver.cube.print();
 
+    CornerPatternDatabase db;
     RubiksCube3dArray cube;
-    for(int i=0; i<8; i++){
-        cout << "Corner " << i << ", Index -> " << (int)cube.getCornerIndex(i) << ", Colors -> " << cube.getCornerColorString(i) <<  
-        ", Orientation -> " << (int)cube.getCornerOrientation(i) << endl;
-    }
+    cout << db.getDatabaseIndex(cube) << endl;
 
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);

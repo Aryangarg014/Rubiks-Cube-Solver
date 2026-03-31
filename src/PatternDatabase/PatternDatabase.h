@@ -12,7 +12,7 @@ private:
 
 public:
     // Initialize a database of given size with given value
-    PatternDatabase(int size, uint8_t initialValue=0);
+    PatternDatabase(int size, uint8_t initialValue=15);
 
     /*
         Returns the database index(nibble position) corresponding to the given cube state.
