@@ -29,7 +29,8 @@ Progress:
 
 - Structured and Implemented Nibble Array
 - Structured and Implemented the Pattern Database
-- Next : Corner Database
+- Added getCornerIndex and getCornerOrientation in RubiksCube base class
+- Next : Corner Pattern Database
 
 Goals:
 - Multiple cube representations

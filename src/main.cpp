@@ -8,7 +8,7 @@
 // #include "solver/DFSSolver.h"
 // #include "solver/BFSSolver.h"
 // #include "solver/IDDFSSolver.h"
-#include "solver/IDAStarSolver.h"
+// #include "solver/IDAStarSolver.h"
 using namespace std;
 
 // // Apply a given sequence of moves to any cube representation
@@ -205,22 +205,30 @@ int main(){
     // testIDDFSSolver<RubiksCube1dArray, Hash1dArray>("1D Array", cube1d, solverDepth);
     // testIDDFSSolver<RubiksCube3dArray, Hash3dArray>("3D Array", cube3d, solverDepth);
 
-    RubiksCubeBitboard cube;
-    cube.print();
-    auto shuffle_moves = cube.randomShuffleRubiksCube(5);
-    cout << "Moves Applied: ";
-    for(auto mv : shuffle_moves) cout << cube.getMove(mv) << " ";
-    cout << endl;
 
-    cube.print();
+    // // -------------------------- IDA* Solver Testing ----------------------------
+    // RubiksCubeBitboard cube;
+    // cube.print();
+    // auto shuffle_moves = cube.randomShuffleRubiksCube(5);
+    // cout << "Moves Applied: ";
+    // for(auto mv : shuffle_moves) cout << cube.getMove(mv) << " ";
+    // cout << endl;
 
-    IDAStarSolver<RubiksCubeBitboard, HashBitboard> solver(cube);
-    vector<RubiksCube::MOVE> movesToSolve = solver.solve();
-    cout << "Moves To Solve: ";
-    for(auto mv : movesToSolve) cout << cube.getMove(mv) << " ";
-    cout << endl;
+    // cube.print();
 
-    solver.cube.print();
+    // IDAStarSolver<RubiksCubeBitboard, HashBitboard> solver(cube);
+    // vector<RubiksCube::MOVE> movesToSolve = solver.solve();
+    // cout << "Moves To Solve: ";
+    // for(auto mv : movesToSolve) cout << cube.getMove(mv) << " ";
+    // cout << endl;
+
+    // solver.cube.print();
+
+    RubiksCube3dArray cube;
+    for(int i=0; i<8; i++){
+        cout << "Corner " << i << ", Index -> " << (int)cube.getCornerIndex(i) << ", Colors -> " << cube.getCornerColorString(i) <<  
+        ", Orientation -> " << (int)cube.getCornerOrientation(i) << endl;
+    }
 
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);

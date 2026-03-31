@@ -121,4 +121,12 @@ public:
 
     virtual RubiksCube& f2() = 0;
 
+    // returns a string of 3 colors present at a given corner position
+    string getCornerColorString(uint8_t cornerPos) const;
+
+    // returns which corner cubie (0 to 7) is present at a given corner position
+    uint8_t getCornerIndex(uint8_t cornerPos) const;
+
+    // returns the orientation (0 to 2) of the corner cubie present at the given corner position
+    uint8_t getCornerOrientation(uint8_t cornerPos) const;
 };
