@@ -1,7 +1,8 @@
 #pragma once
 #include <bits/stdc++.h>
 #include "../cube/RubiksCube.h"
-#include "../PatternDatabase/PatternDatabase.h"
+// #include "../PatternDatabase/PatternDatabase.h"
+#include "../PatternDatabase/CornerPatternDatabase.h"
 
 using namespace std;
 
@@ -9,7 +10,7 @@ template<typename T, typename H>
 class IDAStarSolver{
 private:
     vector<RubiksCube::MOVE> moves;
-    PatternDatabase<T> patternDB;   // used to get h value for a cube state
+    CornerPatternDatabase patternDB;   // used to get h value for a cube state
     unordered_map<T, RubiksCube::MOVE, H> move_done;    // move done to reach a cube state
 
     struct Node{
@@ -33,7 +34,7 @@ private:
         priority_queue<Node, vector<Node>, Compare> pq;
         unordered_map<T, int, H> dist;      // stores the best g to reach a particular cube state
 
-        auto start = Node(cube, 0, patternDB.getEstimate(cube));
+        auto start = Node(cube, 0, patternDB.getNumMoves(cube));
         dist[start.cube] = 0;
         pq.push(start);
         
@@ -70,7 +71,7 @@ private:
                 node.cube.move(mv);
 
                 int new_g = node.g + 1;
-                int new_h = patternDB.getEstimate(node.cube);
+                int new_h = patternDB.getNumMoves(node.cube);
 
                 // if found better g(depth) to reach that state (indirectly better f = g + h(remains same for a state))
                 if(dist.find(node.cube) == dist.end() || new_g < dist[node.cube]){
@@ -86,12 +87,13 @@ private:
     }
 public:
     T cube;
-    IDAStarSolver(T cube){
+    IDAStarSolver(T cube, string fileName){
         this->cube = cube;
+        patternDB.fromFile(fileName);
     }
 
     vector<RubiksCube::MOVE> solve(){
-        int threshold = patternDB.getEstimate(cube);
+        int threshold = patternDB.getNumMoves(cube);
         while(true){
             move_done.clear();
             auto it = AStar(threshold);

@@ -2,14 +2,16 @@
 // #include <chrono>
 
 #include "cube/RubiksCube.h"
-#include "cube/RubiksCube3dArray.cpp"
-#include "cube/RubiksCube1dArray.cpp"
-#include "cube/RubiksCubeBitboard.cpp"
+#include "cube/RubiksCube3dArray.h"
+#include "cube/RubiksCube1dArray.h"
+#include "cube/RubiksCubeBitboard.h"
 // #include "solver/DFSSolver.h"
 // #include "solver/BFSSolver.h"
 // #include "solver/IDDFSSolver.h"
-// #include "solver/IDAStarSolver.h"
-#include "PatternDatabase/CornerPatternDatabase.h"
+#include "solver/IDAStarSolver.h"
+// #include "PatternDatabase/CornerPatternDatabase.h"
+#include "PatternDatabase/CornerDBMaker.h"
+
 using namespace std;
 
 // // Apply a given sequence of moves to any cube representation
@@ -225,9 +227,42 @@ int main(){
 
     // solver.cube.print();
 
-    CornerPatternDatabase db;
+    string dbFile = "C:\\Users\\garga\\Desktop\\Rubiks-Cube-Solver\\Databases\\cornerDepth8.bin";
+
+    // Generate DB only if file does not exist
+    ifstream fin(dbFile, ios::binary);
+    if(!fin){
+        cout << "Pattern DB file not found. Generating...\n";
+        CornerDBMaker dbMaker(dbFile);
+        dbMaker.bfsAndStore();
+    }
+    else{
+        cout << "Pattern DB file already exists. Using stored database.\n";
+        fin.close();
+    }
+
     RubiksCube3dArray cube;
-    cout << db.getDatabaseIndex(cube) << endl;
+    auto shuffleMoves = cube.randomShuffleRubiksCube(8);
+
+    cout << "Moves Applied: ";
+    for(auto &mv : shuffleMoves){
+        cout << RubiksCube::getMove(mv) << " ";
+    }
+    cout << endl;
+    // cout << "Scrambled cube:\n";
+    cube.print();
+
+    IDAStarSolver<RubiksCube3dArray, Hash3dArray> solver(cube, dbFile);
+    vector<RubiksCube::MOVE> ans = solver.solve();
+
+    cout << "Solved Cube: " << endl;
+    solver.cube.print();
+
+    cout << "Solution moves: ";
+    for(auto mv : ans){
+        cout << RubiksCube::getMove(mv) << " ";
+    }
+    cout << endl;
 
     auto end = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::milliseconds>(end - start);

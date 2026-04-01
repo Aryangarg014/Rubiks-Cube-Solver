@@ -32,7 +32,9 @@ Progress:
 - Added getCornerIndex and getCornerOrientation in RubiksCube base class
 - Added Permutation Indexer and math utility functions
 - Added Corner Pattern Database
-- Next : Create the Corner Database Maker using BFS
+- Added Corner DB Maker and generated the database of depth 5 and 8
+- Tested with shuffle depth upto 8
+- Next : 
 
 Goals:
 - Multiple cube representations

@@ -6,8 +6,8 @@
 #include "PermutationIndexer.h"
 using namespace std;
 
-class CornerPatternDatabase : PatternDatabase{
-    
+class CornerPatternDatabase : public PatternDatabase{
+
 private:
     PermutationIndexer<8> permIndexer;
 
